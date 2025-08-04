@@ -1,10 +1,10 @@
-.header {
+header {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
   width: 90%;
-  min-width: 50rem;
+  max-width: 50rem;
   margin: 0 auto 2rem auto;
   text-align: center;
   background: linear-gradient(
@@ -36,7 +36,7 @@ p {
 }
 
 @media (min-width: 768px) {
-  .header {
+  header {
     padding: 2rem;
   }
 
