@@ -15,6 +15,10 @@
   </ul>
 
   @if (isAddingTask) {
-  <app-task-modal [isAddingTask]="isAddingTask" (close)="onClose()" />
+  <app-task-modal
+    [isAddingTask]="isAddingTask"
+    (close)="onClose()"
+    (newTask)="newTask($event)"
+  />
   }
 </section>

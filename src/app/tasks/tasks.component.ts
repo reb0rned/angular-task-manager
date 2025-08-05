@@ -3,6 +3,7 @@ import { User } from '../user/user.model';
 import { TaskComponent } from "./task/task.component";
 import { dummyTasks } from '../../data/tasks';
 import { TaskModalComponent } from "./task-modal/task-modal.component";
+import { newTask } from './task/task.model';
 
 @Component({
   selector: 'app-tasks',
@@ -30,5 +31,15 @@ export class TasksComponent {
 
   onClose() {
     return this.isAddingTask = false
+  }
+
+  newTask(newTask: newTask) {
+    this.tasks.unshift({
+      ...newTask,
+      id: Date.now().toString(36) + Math.random().toString(36).slice(2, 8),
+      userId: this.user?.id!
+    })
+
+    this.onClose()
   }
 }

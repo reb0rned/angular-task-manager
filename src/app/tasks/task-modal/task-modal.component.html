@@ -1,20 +1,30 @@
-<div class="modal-overlay">
-  <form class="modal">
+<div class="modal-overlay" (click)="onOverlayClick($event)">
+  <form class="modal" (ngSubmit)="onSubmit()">
     <h2>Adding Task</h2>
 
     <label>
       <span>Title</span>
-      <input type="text" placeholder="Enter title..." />
+      <input
+        name="title"
+        type="text"
+        placeholder="Enter title..."
+        [(ngModel)]="title"
+      />
     </label>
 
     <label>
       <span>Summary</span>
-      <input type="text" placeholder="Enter summary..." />
+      <input
+        name="summary"
+        type="text"
+        placeholder="Enter summary..."
+        [(ngModel)]="summary"
+      />
     </label>
 
     <label>
       <span>Due Date</span>
-      <input type="date" />
+      <input name="dueDate" type="date" [(ngModel)]="dueDate" />
     </label>
 
     <div class="buttons">
