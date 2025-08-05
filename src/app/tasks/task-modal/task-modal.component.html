@@ -1,0 +1,25 @@
+<div class="modal-overlay">
+  <form class="modal">
+    <h2>Adding Task</h2>
+
+    <label>
+      <span>Title</span>
+      <input type="text" placeholder="Enter title..." />
+    </label>
+
+    <label>
+      <span>Summary</span>
+      <input type="text" placeholder="Enter summary..." />
+    </label>
+
+    <label>
+      <span>Due Date</span>
+      <input type="date" />
+    </label>
+
+    <div class="buttons">
+      <button>Add Task</button>
+      <button type="button" (click)="onClose()">Close</button>
+    </div>
+  </form>
+</div>

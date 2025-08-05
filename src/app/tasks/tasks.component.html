@@ -1,0 +1,20 @@
+<section id="tasks">
+  <header>
+    <h2>{{ user?.name }}'s Tasks</h2>
+    <menu>
+      <button (click)="onAddTask()">Add Task</button>
+    </menu>
+  </header>
+
+  <ul>
+    @for (task of selectedUserTasks; track task.id) {
+    <li>
+      <app-task [task]="task" (completed)="onCompleted($event)" />
+    </li>
+    }
+  </ul>
+
+  @if (isAddingTask) {
+  <app-task-modal [isAddingTask]="isAddingTask" (close)="onClose()" />
+  }
+</section>
