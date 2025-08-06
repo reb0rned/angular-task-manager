@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { Task } from '../task/task.model';
 import { CardComponent } from "../card/card.component";
 import { CommonModule } from '@angular/common';
