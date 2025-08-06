@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { newTask } from '../task/task.model';
+import { TasksService } from '../tasks.service';
 
 @Component({
   selector: 'app-task-modal',
@@ -10,11 +10,13 @@ import { newTask } from '../task/task.model';
 })
 export class TaskModalComponent {
   @Input() isAddingTask!: boolean
+  userId = input.required<string>()
   @Output() close = new EventEmitter()
-  @Output() newTask = new EventEmitter<newTask>()
   title = ''
   summary = ''
   dueDate = ''
+
+  private tasksService = inject(TasksService)
 
 
   onClose() {
@@ -30,10 +32,11 @@ export class TaskModalComponent {
   }
 
   onSubmit() {
-    return this.newTask.emit({
+    this.tasksService.addTask({
       title: this.title,
       summary: this.summary,
       dueDate: this.dueDate
-    })
+    }, this.userId())
+    this.close.emit()
   }
 }

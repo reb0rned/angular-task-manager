@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { User } from '../user/user.model';
 import { TaskComponent } from "./task/task.component";
-import { dummyTasks } from '../../data/tasks';
 import { TaskModalComponent } from "./task-modal/task-modal.component";
 import { newTask } from './task/task.model';
+import { TasksService } from './tasks.service';
 
 @Component({
   selector: 'app-tasks',
@@ -13,16 +13,20 @@ import { newTask } from './task/task.model';
 })
 export class TasksComponent {
   @Input({ required: true }) user!: User | null
-  tasks = dummyTasks
   isAddingTask: boolean = false
+
+  constructor(
+    private tasksService: TasksService
+  ) {}
 
 
   get selectedUserTasks() {
-    return this.tasks.filter(task => task.userId === this.user?.id)
+    return this.tasksService.tasks.filter(task => task.userId === this.user?.id)
   }
 
-  onCompleted(taskId: string) {
-    this.tasks = this.tasks.filter(task => task.id !== taskId)
+  newTask(newTask: newTask) {
+    this.tasksService.addTask(newTask, this.user?.id!)
+    this.onClose()
   }
 
   onAddTask() {
@@ -31,15 +35,5 @@ export class TasksComponent {
 
   onClose() {
     return this.isAddingTask = false
-  }
-
-  newTask(newTask: newTask) {
-    this.tasks.unshift({
-      ...newTask,
-      id: Date.now().toString(36) + Math.random().toString(36).slice(2, 8),
-      userId: this.user?.id!
-    })
-
-    this.onClose()
   }
 }
